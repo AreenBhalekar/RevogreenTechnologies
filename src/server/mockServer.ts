@@ -1,9 +1,37 @@
 
-import { EventEmitter } from 'events';
+// Browser-compatible EventEmitter implementation
+class EventEmitter {
+  private events: Record<string, ((...args: any[]) => void)[]> = {};
+
+  on(event: string, listener: (...args: any[]) => void): this {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(listener);
+    return this;
+  }
+
+  off(event: string, listener: (...args: any[]) => void): this {
+    if (this.events[event]) {
+      this.events[event] = this.events[event].filter(l => l !== listener);
+    }
+    return this;
+  }
+
+  emit(event: string, ...args: any[]): boolean {
+    if (this.events[event]) {
+      this.events[event].forEach(listener => {
+        listener(...args);
+      });
+      return true;
+    }
+    return false;
+  }
+}
 
 // Mock server to generate sensor data
 class MockSensorServer extends EventEmitter {
-  private interval: NodeJS.Timeout | null = null;
+  private interval: number | null = null;
   private isRunning = false;
   
   constructor() {
@@ -15,7 +43,7 @@ class MockSensorServer extends EventEmitter {
     if (this.isRunning) return;
     
     this.isRunning = true;
-    this.interval = setInterval(() => {
+    this.interval = window.setInterval(() => {
       // Generate data for Device 1
       const d1Voltage = Math.floor(Math.random() * 100);
       const d1Current = Math.floor(Math.random() * 100);
@@ -42,7 +70,7 @@ class MockSensorServer extends EventEmitter {
   // Stop generating data
   stop() {
     if (this.interval) {
-      clearInterval(this.interval);
+      window.clearInterval(this.interval);
       this.interval = null;
     }
     this.isRunning = false;

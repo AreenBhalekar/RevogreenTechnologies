@@ -64,8 +64,7 @@ const SensorCard: React.FC<SensorCardProps> = ({ data }) => {
           </div>
           <Progress 
             value={data.temperature} 
-            className="h-2" 
-            indicatorClassName={`${data.temperature > 80 ? 'bg-red-500' : data.temperature > 60 ? 'bg-yellow-500' : 'bg-green-500'}`}
+            className={`h-2 ${data.temperature > 80 ? 'bg-red-500' : data.temperature > 60 ? 'bg-yellow-500' : 'bg-green-500'}`}
           />
         </div>
       </CardContent>
