@@ -1,73 +1,86 @@
-# Welcome to your Lovable project
 
-## Project info
+# Sensor Stream Viewer
 
-**URL**: https://lovable.dev/projects/3270614c-3d12-4ade-845a-40e3b9550fa8
+A React application that connects to a mock sensor server and displays real-time data from multiple devices.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Real-time data streaming from a mock server
+- Dashboard view showing data from multiple devices simultaneously
+- Detailed view for each individual device
+- Historical data visualization using line charts
+- Responsive design that works on desktop and mobile
 
-**Use Lovable**
+## Project Structure
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3270614c-3d12-4ade-845a-40e3b9550fa8) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/       # React components
+├── contexts/         # Context providers
+├── server/           # Mock server implementation
+├── lib/              # Utility functions
+└── pages/            # Main pages
 ```
 
-**Edit a file directly in GitHub**
+## Data Format
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The application receives data in the following format:
 
-**Use GitHub Codespaces**
+```
+D1VxxCyyTzz
+D2VxxCyyTzz
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Where:
+- D1 / D2: Device ID
+- Vxx: Voltage (value between 0–99)
+- Cyy: Current (value between 0–99)
+- Tzz: Temperature (value between 0–99)
 
-## What technologies are used for this project?
+## How to Run
 
-This project is built with:
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Vite
-- TypeScript
+## Technologies Used
+
 - React
-- shadcn-ui
+- TypeScript
 - Tailwind CSS
+- shadcn/ui for UI components
+- Recharts for data visualization
+- EventEmitter for the mock server implementation
 
-## How can I deploy this project?
+## Implementation Details
 
-Simply open [Lovable](https://lovable.dev/projects/3270614c-3d12-4ade-845a-40e3b9550fa8) and click on Share -> Publish.
+### Mock Server
 
-## Can I connect a custom domain to my Lovable project?
+Instead of setting up a real backend server, this project includes a mock server implementation that:
+- Generates random sensor data for two devices (D1 and D2)
+- Emits data events every 1-2 seconds
+- Formats the data according to the specified format
 
-Yes, you can!
+### Data Flow
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. The `MockSensorServer` generates random data
+2. The `SensorProvider` context:
+   - Listens for data events
+   - Parses the data strings
+   - Maintains current and historical data state
+3. UI components consume the context and render the data
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Future Improvements
+
+- Add more devices
+- Implement data filtering options
+- Add alerts for threshold values
+- Add data export functionality
+- Implement offline storage
