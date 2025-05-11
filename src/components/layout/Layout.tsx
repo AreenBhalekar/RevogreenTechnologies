@@ -15,7 +15,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="container mx-auto flex justify-between items-center">
           <Link to="/" className="text-xl font-bold flex items-center gap-2">
             <Monitor />
-            <span>Sensor Stream Viewer</span>
+            <span>Revogreen Technologies</span>
           </Link>
           
           <nav className="flex items-center gap-2">
@@ -55,7 +55,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-300 py-3 px-6">
         <div className="container mx-auto text-center text-sm">
-          <p>Sensor Stream Viewer &copy; {new Date().getFullYear()}</p>
+          <p>Revogreen Technologies &copy; {new Date().getFullYear()}</p>
         </div>
       </footer>
     </div>

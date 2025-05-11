@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Sensor Stream Dashboard</h1>
+      <h1 className="text-3xl font-bold">Revogreen Technologies Dashboard</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Device 1 Data Card */}
