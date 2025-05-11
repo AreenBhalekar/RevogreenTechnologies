@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Monitor } from 'lucide-react';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -13,8 +11,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Header */}
       <header className="bg-slate-900 text-white py-4 px-6 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold flex items-center gap-2">
-            <Monitor />
+          <Link to="/" className="text-xl font-bold">
             <span>Revogreen Technologies</span>
           </Link>
           
